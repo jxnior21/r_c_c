@@ -1,0 +1,158 @@
+<article>
+	<div class="container">
+		<% if session[:user_id] %>
+		  <header class="row">
+				<%= link_to 'Admin', admin_menu_path, :class => 'col-12 adminlink' %>
+		  </header>
+		<% else %>
+			<header class="row">
+				<%= link_to 'Admin', admin_login_path, :class => 'col-12 adminlink' %>
+		  </header>
+		<% end %>
+  </div>
+	<div class="container text-center">
+	  <header class="row">
+	  	<h1 class="col">Renovacion Catolica Caristmatica</h1>
+	  </header>
+  </div>
+	<div class="container-fluid text-center title">
+		<div class="row">
+			<div class="col circle1"></div>
+		  <h2 class="col-9 col-sm-6">Renovacion Carismatica</h2>
+			<div class="col circle2"></div>
+	  </div>
+	</div>
+  <div class="text-center">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="card" style="width: 18rem;">
+          <%= image_tag "Lighthouse(5 x 7).jpg", :class => "card-img-top", :alt => "Card image cap" %>
+				  <div class="card-body">
+				    <h5 class="card-title">Formación</h5>
+				    <p class="card-text">Description</p>
+						<%= link_to 'Lee mas', main_formacion_path, :class => 'btn' %>
+				  </div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card" style="width: 18rem;">
+          <%= image_tag "Penguins(5 x 7).jpg", :class => "card-img-top", :alt => "Card image cap" %>
+				  <div class="card-body">
+				    <h5 class="card-title">Evangelización</h5>
+				    <p class="card-text">Description</p>
+						<%= link_to 'Lee mas', main_evangelizacion_path, :class => 'btn' %>
+				  </div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card" style="width: 18rem;">
+          <%= image_tag "Tulips(5 x 7).jpg", :class => "card-img-top", :alt => "Card image cap" %>
+				  <div class="card-body">
+				    <h5 class="card-title">Renovacion Catolica Carismatica Hispana - Orlando</h5>
+				    <p class="card-text">Description</p>
+						<%= link_to 'Lee mas', main_rccho_path, :class => 'btn' %>
+				  </div>
+				</div>
+			</div>
+    </div>
+  </div>
+	<div class="container-fluid text-center title">
+		<div class="row">
+			<div class="col circle1"></div>
+		  <h2 class="col-6 col-sm-2">Eventos</h2>
+			<div class="col circle2"></div>
+    </div>
+	</div>
+	<div class="container text-center">
+		<div class="row">
+			<% @events.each do |event| %>
+			<section class="col-12 col-sm-3">
+				<h3><%= event.title %></h3>
+				<p class="text-justify text-center">
+				<em>Fecha: <%= event.date %></em>
+				<br />
+				<br />
+				<em>Description</em>: <%= event.description %></p>
+				<!-- Show event Modal button -->
+				<div class="row">
+					<div class="col-12">
+						<button type="button" title="Show event" class="btn" data-toggle="modal" data-target="#ShowModal-<%= event.id %>">
+							Show event
+						</button>
+					</div>
+				</div>
+				<!-- Show event Modal -->
+				<div class="modal fade" id="ShowModal-<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel"><%= event.title %></h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				        <p>Fecha: <%= event.date %></p><br />
+								<p>Description: <%= event.description %></p><br />
+				      <div class="modal-footer">
+				        <button type="button" class="btn" data-dismiss="modal">Close</button>
+							</div>
+				    </div>
+				  </div>
+				</div>
+			</section>
+			<% end %>
+			<div class="table-responsive container">
+				<table class="table">
+					<caption class="text-center">Futuro eventos</caption>
+				  <thead>
+				    <tr>
+				      <th scope="col">Fecha</th>
+				      <th scope="col">Evento</th>
+							<th scope="col">Typo</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+						<% @future_events.each do |event| %>
+				    <tr class="thover">
+				      <th scope="row"><%= event.date %></th>
+				      <td><%= event.title %></td>
+							<td><%= event.kind %></td>
+				    </tr>
+				    <% end %>
+				  </tbody>
+				</table>
+			</div>
+	  </div>
+  </div>
+	<div class="container-fluid text-center title">
+		<div class="row">
+			<div class="col circle1"></div>
+		  <h2 class="col-9 col-sm-3">Contactanos</h2>
+			<div class="col circle2"></div>
+    </div>
+	</div>
+	<div class="container text-center">
+		<div class="row">
+			<section class="col contact">
+				<p>
+          <%= image_tag "Koala(5 x 7).jpg", :class => "rounded-cirlce", :alt => "Card image cap" %><br />
+					<em>Nombre</em><br />
+					<em>Correo electrónico</em><br />
+					<em>Número de teléfono</em><br />
+					<em>dirección</em>
+				</p>
+			</section>
+	  </div>
+  </div>
+	<div class="container-fluid title">
+		<div class="row">
+			<footer class="col">
+				<p class="text-center bye"><em>Que tengas un buen dia</em></p>
+				<p>©2017 my website</p>
+			</footer>
+		</div>
+  </div>
+</article>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>

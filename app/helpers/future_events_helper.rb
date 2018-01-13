@@ -1,0 +1,2 @@
+module FutureEventsHelper
+end

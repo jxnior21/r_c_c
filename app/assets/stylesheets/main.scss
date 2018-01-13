@@ -1,0 +1,183 @@
+// Place all the styles related to the main controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+colors:
+#B3001B - red
+#EEF4ED - light grey
+*/
+
+
+
+body {
+  color: #B3001B;
+  background: #EEF4ED;
+  font-family: georgia, sans-serif;
+}
+
+.adminlink {
+  color: #B3001B;
+  text-align: right;
+  font-size: 15px;
+}
+
+.adminlink:hover {
+  color: #B3001B;
+}
+
+p, blockquote{
+  text-shadow: black 1px 0px 0px;
+}
+
+.title {
+  border-bottom: 5px #B3001B solid;
+  border-top: 5px #B3001B solid;
+  margin: 15px auto;
+}
+
+.circle1 {
+  background-color: #EEF4ED;
+  margin: auto 0px auto auto;
+  max-width:5px;
+  height: 35px;
+  border: 3px #B3001B solid;
+  border-radius: 20px;
+  animation-name: circle;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+.circle2 {
+  background-color: #EEF4ED;
+  margin: auto auto auto 0px;
+  max-width:5px;
+  height: 35px;
+  border: 3px #B3001B solid;
+  border-radius: 20px;
+  animation-name: circle;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+@keyframes circle {
+  from {background-color: #EEF4ED;}
+  to {background-color: #B3001B;}
+}
+
+nav {
+  margin: 15px auto;
+}
+
+.btn, nav a{
+  color: #B3001B;
+  font-size: 20px;
+  margin: 10px auto;
+  padding: 5px;
+  text-decoration: none;
+  background: #EEF4ED;
+  border-radius: 10px;
+  border: 1px #B3001B solid;
+  transition: .5s;
+}
+
+.btn:hover, nav a:hover{
+  color: #EEF4ED;
+  background: #B3001B;
+  border: 1px #B3001B solid;
+  text-decoration: none;
+}
+
+.card {
+  position: relative;
+  margin: 15px auto;
+  background-color: #EEF4ED;
+  border: 1px #B3001B solid;
+  transition: .5s;
+}
+
+.card:hover {
+  box-shadow: 2px 2px 5px #B3001B, -2px -2px 5px #B3001B;
+  transform: scale(1.05);
+}
+
+h1 {
+  margin: 35px 5px 25px 5px;
+}
+
+h2 {
+  font-weight: 700;
+  font-style: italic;
+  margin: 15px 0px;
+}
+
+h3 {
+  background-color: #B3001B ;
+  color: #EEF4ED;
+  padding: 10px;
+  width: 220px;
+  border-radius: 10px;
+  margin: 15px auto;
+  font-family: georgia;
+}
+
+.carousel {
+  margin: 80px 10px 10px 10px;
+  border: 5px #B3001B solid;
+  border-radius: 10px;
+}
+
+.blockquote-footer {
+  color: inherit;
+}
+
+.table {
+  margin: 15px auto;
+  border: 5px #B3001B solid;
+  width: 500px;
+}
+
+table caption {
+  color: #B3001B;
+}
+
+tr {
+  border-bottom: 3px #B3001B solid;
+}
+
+tr a {
+  color: inherit;
+}
+
+tr a:hover {
+  color: inherit;
+}
+
+.thover {
+  transition: .5s;
+}
+
+.thover:hover {
+  background-color: #B3001B;
+  color: #EEF4ED;
+}
+
+.contact img {
+  display: block;
+  margin: auto;
+  margin-top: 15px;
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+  border: 5px #B3001B solid;
+  border-radius: 50%;
+}
+
+footer {
+  margin: 5px;
+}
+
+.bye {
+  font-size: 25px;
+}
