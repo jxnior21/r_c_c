@@ -1,7 +1,11 @@
 <article>
 	<div class="container">
 	  <header class="row">
-			<%= link_to('Logout', admin_logout_path, :class => 'col-12 adminlink') %>
+			<div class="col"></div>
+			<div class="col"></div>
+			<div class="col-1">
+				<%= link_to('Logout', admin_logout_path, :class => 'col-12 adminlink') %>
+			</div>
 	  </header>
   </div>
 	<div class="container text-center">
@@ -11,7 +15,7 @@
   </div>
   <div class="row">
     <%= link_to 'Principal', root_path, :class => 'btn' %>
-  </div>
+	</div>
 	<div class="container-fluid text-center title">
 		<div class="row">
 		  <h2 class="col">Administrative menu</h2>
@@ -33,10 +37,10 @@
 			<section class="col-12 col-sm-3">
 				<h3><%= event.title %></h3>
 				<p class="text-justify text-center">
-				<em>Fecha: <%= event.date %></em>
+				<em>Fecha</em>: <%= event.date %>
 				<br />
 				<br />
-				<em>Description</em>: <%= event.description %></p>
+				<em>Description</em>: <%= event.description %><br /><br />
 				<div class="row">
 	        <div class="col-6 col-sm-6">
 						<%= link_to 'Edit', edit_event_path(event), :class => 'btn' %>
@@ -84,16 +88,16 @@
 				<caption class="text-center">Futuro eventos</caption>
 			  <thead>
 			    <tr>
-			      <th scope="col">Fecha</th>
-			      <th scope="col">Evento</th>
-						<th scope="col">Typo</th>
-            <th colspan="2" scope="col">Actions</th>
+			      <th>Fecha</th>
+			      <th>Evento</th>
+						<th>Typo</th>
+            <th colspan="2">Actions</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 					<% @future_events.each do |event| %>
 			    <tr class="thover">
-			      <th scope="row"><%= event.date %></th>
+			      <th><%= event.date %></th>
 			      <td><%= event.title %></td>
 						<td><%= event.kind %></td>
             <td>

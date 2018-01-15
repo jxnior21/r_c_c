@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.string 'title', :default => 'Evento', :null => false
       t.string 'date', :default => '00/00/00', :null => true, :limit => 8
       t.string 'description', :null => false
+      t.string 'price', :default => '00.00', :null => false
       t.timestamps
     end
   end

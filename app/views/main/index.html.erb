@@ -2,11 +2,19 @@
 	<div class="container">
 		<% if session[:user_id] %>
 		  <header class="row">
-				<%= link_to 'Admin', admin_menu_path, :class => 'col-12 adminlink' %>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col-1">
+					<%= link_to 'Admin', admin_menu_path, :class => 'adminlink' %>
+				</div>
 		  </header>
 		<% else %>
 			<header class="row">
-				<%= link_to 'Admin', admin_login_path, :class => 'col-12 adminlink' %>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col-1">
+					<%= link_to 'Admin', admin_login_path, :class => 'adminlink' %>
+				</div>
 		  </header>
 		<% end %>
   </div>
@@ -69,10 +77,10 @@
 			<section class="col-12 col-sm-3">
 				<h3><%= event.title %></h3>
 				<p class="text-justify text-center">
-				<em>Fecha: <%= event.date %></em>
+				<em>Fecha</em>: <%= event.date %>
 				<br />
 				<br />
-				<em>Description</em>: <%= event.description %></p>
+				<em>Description</em>: <%= event.description %><br />
 				<!-- Show event Modal button -->
 				<div class="row">
 					<div class="col-12">
@@ -106,15 +114,15 @@
 					<caption class="text-center">Futuro eventos</caption>
 				  <thead>
 				    <tr>
-				      <th scope="col">Fecha</th>
-				      <th scope="col">Evento</th>
-							<th scope="col">Typo</th>
+				      <th>Fecha</th>
+				      <th>Evento</th>
+							<th>Typo</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 						<% @future_events.each do |event| %>
 				    <tr class="thover">
-				      <th scope="row"><%= event.date %></th>
+				      <td><%= event.date %></td>
 				      <td><%= event.title %></td>
 							<td><%= event.kind %></td>
 				    </tr>

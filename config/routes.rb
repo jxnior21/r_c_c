@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :events do
     member do
       get :delete
@@ -38,8 +39,6 @@ Rails.application.routes.draw do
   get 'main/evangelizacion'
 
   get 'main/rccho'
-
-  resources :charges
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

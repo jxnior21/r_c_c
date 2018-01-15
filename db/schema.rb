@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180106193320) do
     t.string "title", default: "Evento", null: false
     t.string "date", limit: 8, default: "00/00/00"
     t.string "description", null: false
+    t.string "price", default: "00.00", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
