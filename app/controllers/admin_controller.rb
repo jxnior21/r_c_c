@@ -8,6 +8,7 @@ class AdminController < ApplicationController
   end
 
   def menu
+    @counter = Event.last
     @events = Event.all
     @future_events = FutureEvent.all
   end

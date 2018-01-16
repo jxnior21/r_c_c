@@ -1,7 +1,7 @@
 <article>
   <div class="container-fluid text-center">
     <header class="row">
-    	<h1 class="col-12">Renovacion Catolica Carismatica Hispana - Orlando</h1>
+    	<h1 class="col-12">Renovacion Catolica Caristmatica</h1>
     </header>
   </div>
   <nav class="container text-center">
@@ -9,7 +9,7 @@
   		<div class="col col-sm-2"></div>
   		<div class="col col-sm-8">
   			<div class="row">
-  				<%= link_to 'Menu', admin_path, :class => 'col col-sm-3' %>
+  				<%= link_to 'Menu', admin_path, :class => 'button' %>
   			</div>
   		</div>
   		<div class="col col-sm-2"></div>
@@ -25,13 +25,13 @@
       <div class="col-sm-4"></div>
       <div class="col-12 col-sm-4">
         <%= form_for (@fevent) do |f| %>
-          <strong>Nombre: </strong><br />
+          <strong>Nombre </strong><br />
           <%= f.text_field(:title, :class => 'form-control') %><br />
-          <strong>Fecha: </strong><br />
+          <strong>Fecha </strong><br />
           <%= f.text_field(:date, :class => 'form-control') %><br />
-          <strong>Typo: </strong><br />
+          <strong>Typo </strong><br />
           <%= f.text_field(:kind, :class => 'form-control') %><br />
-          <%= f.submit "Add new future event", :class => 'btn' %>
+          <%= f.submit "Add new future event", :class => 'button' %>
         <% end %>
       </div>
       <div class="col-sm-4"></div>
@@ -40,7 +40,6 @@
   <div class="container-fluid title">
 		<div class="row">
 			<footer class="col">
-				<p class="text-center bye"><em>Que tengas un buen dia</em></p>
 				<p>©2017 my website</p>
 			</footer>
 		</div>

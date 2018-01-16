@@ -1,18 +1,14 @@
 <article>
 	<div class="container">
 		<% if session[:user_id] %>
-		  <header class="row">
-				<div class="col"></div>
-				<div class="col"></div>
-				<div class="col-1">
+		  <header class="row adminl text-right">
+				<div class="col">
 					<%= link_to 'Admin', admin_menu_path, :class => 'adminlink' %>
 				</div>
 		  </header>
 		<% else %>
-			<header class="row">
-				<div class="col"></div>
-				<div class="col"></div>
-				<div class="col-1">
+			<header class="row adminl text-right">
+				<div class="col">
 					<%= link_to 'Admin', admin_login_path, :class => 'adminlink' %>
 				</div>
 		  </header>
@@ -38,7 +34,7 @@
 				  <div class="card-body">
 				    <h5 class="card-title">Formación</h5>
 				    <p class="card-text">Description</p>
-						<%= link_to 'Lee mas', main_formacion_path, :class => 'btn' %>
+						<%= link_to 'Lee mas', main_formacion_path, :class => 'button' %>
 				  </div>
 				</div>
 			</div>
@@ -48,7 +44,7 @@
 				  <div class="card-body">
 				    <h5 class="card-title">Evangelización</h5>
 				    <p class="card-text">Description</p>
-						<%= link_to 'Lee mas', main_evangelizacion_path, :class => 'btn' %>
+						<%= link_to 'Lee mas', main_evangelizacion_path, :class => 'button' %>
 				  </div>
 				</div>
 			</div>
@@ -58,9 +54,12 @@
 				  <div class="card-body">
 				    <h5 class="card-title">Renovacion Catolica Carismatica Hispana - Orlando</h5>
 				    <p class="card-text">Description</p>
-						<%= link_to 'Lee mas', main_rccho_path, :class => 'btn' %>
+						<%= link_to 'Lee mas', main_rccho_path, :class => 'button' %>
 				  </div>
 				</div>
+			</div>
+			<div class="col-12">
+				<%= link_to 'Evangelio del dia', 'http://evangeliodeldia.org/M/SP/', :class => 'button' %>
 			</div>
     </div>
   </div>
@@ -80,12 +79,12 @@
 				<em>Fecha</em>: <%= event.date %>
 				<br />
 				<br />
-				<em>Description</em>: <%= event.description %><br />
+				<em>Descripción</em>: <%= event.description %></p><br />
 				<!-- Show event Modal button -->
 				<div class="row">
 					<div class="col-12">
-						<button type="button" title="Show event" class="btn" data-toggle="modal" data-target="#ShowModal-<%= event.id %>">
-							Show event
+						<button type="button" title="Mostrar evento" class="button" data-toggle="modal" data-target="#ShowModal-<%= event.id %>">
+							Mostrar evento
 						</button>
 					</div>
 				</div>
@@ -102,7 +101,7 @@
 				        <p>Fecha: <%= event.date %></p><br />
 								<p>Description: <%= event.description %></p><br />
 				      <div class="modal-footer">
-				        <button type="button" class="btn" data-dismiss="modal">Close</button>
+				        <button type="button" class="button" data-dismiss="modal">Close</button>
 							</div>
 				    </div>
 				  </div>
@@ -149,6 +148,13 @@
 					<em>Número de teléfono</em><br />
 					<em>dirección</em>
 				</p>
+				<div class="row">
+					<div class="col-12">
+						<button type="button" title="Donate" class="button">
+							Donate
+						</button>
+					</div>
+				</div>
 			</section>
 	  </div>
   </div>
