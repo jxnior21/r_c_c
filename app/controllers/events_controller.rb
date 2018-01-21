@@ -11,8 +11,6 @@ class EventsController < ApplicationController
     if @event.save
       flash[:notice] = "Successfully made new event"
       redirect_to(admin_path)
-    else
-      render('new')
     end
   end
 
@@ -25,8 +23,6 @@ class EventsController < ApplicationController
     if @event.update_attributes(event_params)
       flash[:notice] = "Successfully updated event"
       redirect_to(admin_path)
-    else
-      render('edit')
     end
   end
 

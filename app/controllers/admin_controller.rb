@@ -36,23 +36,20 @@ class AdminController < ApplicationController
       flash[:notice] = "You are now logged in"
       redirect_to(admin_path)
     else
-      flash.now[:notice] = "Invalid username or password!"
-      render('login')
+      redirect_to(root_path)
     end
   end
 
   def logout
     session[:user_id] = nil
-    flash[:notice] = "Logged out"
-    redirect_to(admin_login_path)
+    redirect_to(root_path)
   end
 
   private
 
   def confirm_logged_in
     unless session[:user_id]
-      flash[:notice] = "Please log in!"
-      redirect_to(admin_login_path)
+      redirect_to(root_path)
     end
   end
 

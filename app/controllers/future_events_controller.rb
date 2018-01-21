@@ -11,8 +11,6 @@ class FutureEventsController < ApplicationController
     if @fevent.save
       flash[:notice] = "Successfully made new future event"
       redirect_to(admin_path)
-    else
-      render('new')
     end
   end
 
@@ -25,8 +23,6 @@ class FutureEventsController < ApplicationController
     if @fevent.update_attributes(event_params)
       flash[:notice] = "Successfully updated future event"
       redirect_to(admin_path)
-    else
-      render('edit')
     end
   end
 

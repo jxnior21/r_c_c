@@ -122,14 +122,104 @@
   font-size: 25px;
 }
 
+input[type=text], input[type=password], textarea#event_description {
+  padding: 10px;
+  color: $darkred;
+  border-radius: 10px;
+  border: 1px $darkred solid;
+  background-color: $white;
+  transition: .5s;
+}
+
+input[type=text]::placeholder, input[type=password]::placeholder, textarea#event_description::placeholder {
+  color: $darkred;
+}
+
+input[type=text]:focus, input[type=password]:focus, textarea#event_description:focus {
+  background-color: $darkred;
+  border: 1px $darkred solid;
+  outline: none;
+  box-shadow: none;
+  color: $white;
+}
+
+input[type=text]:focus::placeholder, input[type=password]:focus::placeholder, textarea#event_description:focus::placeholder {
+  color: $white;
+}
+
+.hint {
+  color: red;
+}
+
+.submit {
+  cursor: pointer;
+}
+
 .login {
   margin: 23px auto;
 }
 
-.form-control {
-  color: $darkred;
-}
-
 .logout {
   margin: 20px;
+}
+
+.modal-header{
+  border-bottom: 3px $darkred solid;
+}
+
+.modal-content {
+  background-color: $white;
+}
+
+.addmargin {
+  margin: 10px 0px;
+}
+
+.modal-footer {
+  border-top: 3px $darkred solid;
+}
+
+.chip {
+  display: inline-block;
+  margin: 5px;
+  padding: 0 10px;
+  height: 48px;
+  font-size: 16px;
+  line-height: 48px;
+  border-radius: 25px;
+  background-color: $white;
+  border: 2px $darkred solid;
+  transition: .5s;
+  a{
+    text-decoration: none;
+    &:visited {
+      color: inherit;
+    }
+    &:link {
+      color: inherit;
+    }
+  }
+  &:hover {
+    color: $white;
+    background-color: $darkred;
+  }
+}
+
+.pcard {
+  border-radius: 10px;
+  height: 300px;
+  background-color: $white;
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  border: 2px $darkred solid;
+  .title {
+    color: $darkred;
+    font-size: 18px;
+    a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black;
+    }
+  }
 }

@@ -5,6 +5,11 @@
 				<%= link_to 'Principal', root_path, :class => 'adminlink' %>
 			</div>
     </header>
+		<header class="row adminl text-right">
+			<div class="col">
+				<%= link_to 'Logout', admin_logout_path, :class => 'adminlink' %>
+			</div>
+    </header>
   </div>
   <div class="container text-center">
     <header class="row">
@@ -37,29 +42,67 @@
 				<br />
 				<em>Description</em>: <%= event.description %><br /><br />
 				<div class="row">
-	        <div class="col-12">
-						<%= link_to 'Edit', edit_event_path(event), :class => 'button' %>
-				  </div>
-					<!-- Delete Modal button -->
+					<!-- Edit event Modal button <%= event.id %> -->
+					<div class="col-12">
+						<button type="button" title="Edit" class="button" data-toggle="modal" data-target="#EditModal-<%= event.id %>">
+						  Edit
+						</button>
+					</div>
+					<!-- Delete event Modal button <%= event.id %> -->
 					<div class="col-12">
 						<button type="button" title="Delete" class="button" data-toggle="modal" data-target="#DeleteModal-<%= event.id %>">
 						  Delete
 						</button>
 					</div>
 				</div>
-				<!-- Delete Modal -->
-				<div class="modal fade" id="DeleteModal-<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<!-- Edit event Modal <%= event.id %> -->
+				<div class="modal fade" id="EditModal-<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+				        <h5 class="modal-title" id="exampleModalLabel">Edit event</h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true">&times;</span>
 				        </button>
 				      </div>
-				        <p>Are you sure you wanna permanetly delete this event?</p><br />
-				        <p>Name: <%= event.title %></p><br />
+							<div class="container text-center">
+						    <div class="row form-group">
+						      <div class="col"></div>
+						      <div class="col-8"><br />
+                    <%= form_for event, :method => 'patch' do |f| %>
+						          <strong>Nombre</strong><br />
+						          <%= f.text_field(:title, :class => 'form-control') %><br />
+						          <strong>Fecha</strong><br />
+						          <%= f.text_field(:date, :class => 'form-control') %><br />
+						          <strong>Description</strong><br />
+						          <%= f.text_area(:description, :class => 'form-control') %><br />
+						          <%= f.submit "Update event", :class => 'button submit' %>
+						        <% end %>
+						      </div>
+						      <div class="col"></div>
+						    </div>
+						  </div>
+				      <div class="modal-footer">
+								<%= link_to 'Cancel', admin_path, :'data-dismiss' => "modal", :class => 'button' %>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<!-- Delete event Modal <%= event.id %> -->
+				<div class="modal fade" id="DeleteModal-<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Delete event</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+							<div class="addmargin">
+								<p>Are you sure you wanna permanetly delete this event?</p><br />
+								<p>Name: <%= event.title %></p><br />
 								<p>Date: <%= event.date %></p><br />
+							</div>
 				      <div class="modal-footer">
 								<%= link_to 'Cancel', admin_path, :'data-dismiss' => "modal", :class => 'button' %>
 								<%= link_to 'Delete', event_path(event), :method => 'delete', :class => 'button' %>
@@ -79,8 +122,47 @@
 			</div>
 		<% end %>
     <div class="row">
+			<!-- Add event Modal button -->
 			<div class="col-12">
-				<%= link_to 'Add new event',  new_event_path, :class => 'button' %>
+				<button type="button" title="Add new event" data-backdrop="static" class="button" data-toggle="modal" data-target="#AddModal">
+					Add new event
+				</button>
+			</div>
+		</div>
+		<!-- Add event Modal -->
+		<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Add new event</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="container text-center">
+				    <div class="row form-group">
+				      <div class="col"></div>
+				      <div class="col-8"><br />
+				        <%= form_for @events.new, :method => 'post' do |f| %>
+				          <strong>Nombre </strong><br />
+				          <%= f.text_field(:title, :class => 'form-control') %>
+									<span id="title-required" class="hint"></span><br />
+				          <strong>Fecha </strong><br />
+				          <%= f.text_field(:date, :class => 'form-control') %>
+									<span id="date-required" class="hint"></span><br />
+				          <strong>Description </strong><br />
+				          <%= f.text_area(:description, :class => 'form-control') %>
+									<span id="description-required" class="hint"></span><br />
+				          <%= f.submit "Add new event", :class => 'button submit' %>
+				        <% end %>
+				      </div>
+				      <div class="col"></div>
+				    </div>
+				  </div>
+					<div class="modal-footer">
+						<%= link_to 'Cancel', admin_path, :'data-dismiss' => "modal", :class => 'button' %>
+					</div>
+				</div>
 			</div>
 		</div>
     <div class="text-center">
@@ -97,40 +179,128 @@
             <th colspan="2">Actions</th>
 			    </tr>
 			  </thead>
+				<% @future_events.each do |event| %>
 			  <tbody>
-					<% @future_events.each do |event| %>
 			    <tr class="thover">
 			      <th><%= event.date %></th>
 			      <td><%= event.title %></td>
 						<td><%= event.kind %></td>
             <td>
 							<div class="row">
+								<!-- Edit future event Modal link <%= event.id %> -->
                 <div class="col">
-                  <%= link_to 'Edit', edit_future_event_path(event) %>
+                  <a href="#EditfModal-<%= event.id %>" data-toggle="modal" >Edit</a>
                 </div>
 								<div class="col">
-                  <%= link_to 'delete', future_event_path(event), :method => 'delete' %>
+                  <a href="#DeletefModal-<%= event.id %>" data-toggle="modal" >Delete</a>
                 </div>
 							</div>
             </td>
 			    </tr>
-			    <% end %>
 				</tbody>
+				<!-- Edit future event Modal <%= event.id %> -->
+				<div class="modal fade" id="EditfModal-<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Edit future event</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="container text-center">
+								<div class="row form-group">
+									<div class="col"></div>
+									<div class="col-8"><br />
+										<%= form_for event, :method => 'patch' do |f| %>
+											<strong>Nombre </strong><br />
+											<%= f.text_field(:title, :class => 'form-control') %><br />
+											<strong>Fecha </strong><br />
+											<%= f.text_field(:date, :class => 'form-control') %><br />
+											<strong>Typo </strong><br />
+											<%= f.text_field(:kind, :class => 'form-control') %><br />
+											<%= f.submit "Update future event", :class => 'button submit' %>
+										<% end %>
+									</div>
+									<div class="col"></div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<%= link_to 'Cancel', admin_path, :'data-dismiss' => "modal", :class => 'button' %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Delete future event Modal <%= event.id %> -->
+				<div class="modal fade" id="DeletefModal-<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Delete future event</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="addmargin">
+								<p>Are you sure you wanna permanetly delete this future event?</p><br />
+								<p>Name: <%= event.title %></p><br />
+								<p>Date: <%= event.date %></p><br />
+							</div>
+							<div class="modal-footer">
+								<%= link_to 'Cancel', admin_path, :'data-dismiss' => "modal", :class => 'button' %>
+								<%= link_to 'Delete', future_event_path(event), :method => 'delete', :class => 'button' %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<% end %>
 			</table>
 		</div>
-		<div class="row text-center">
-      <div class="col-12">
-        <%= link_to 'Add new future event', new_future_event_path, :class => 'button' %>
-      </div>
-	  </div>
+		<div class="row">
+			<!-- Add future event Modal button -->
+			<div class="col-12">
+				<button type="button" title="Add new event" class="button" data-toggle="modal" data-target="#AddfModal">
+					Add new future event
+				</button>
+			</div>
+		</div>
+		<!-- Add future event Modal -->
+		<div class="modal fade" id="AddfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Add new future event</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="container text-center">
+						<div class="row form-group">
+							<div class="col"></div>
+							<div class="col-8"><br />
+								<%= form_for @future_events.new, :method => 'post' do |f| %>
+									<strong>Nombre </strong><br />
+									<%= f.text_field(:title, :html => {:id => 'menuform2'}, :class => 'form-control') %>
+									<span id="title-required2" class="hint"></span><br />
+									<strong>Fecha </strong><br />
+									<%= f.text_field(:date, :class => 'form-control') %>
+									<span id="date-required2" class="hint"></span><br />
+									<strong>Typo </strong><br />
+									<%= f.text_field(:kind, :class => 'form-control') %>
+									<span id="type-required" class="hint"></span><br />
+									<%= f.submit "Add new future event", :class => 'button submit' %>
+								<% end %>
+							</div>
+							<div class="col"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<%= link_to 'Cancel', admin_path, :'data-dismiss' => "modal", :class => 'button' %>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
- <div class="container logout">
-	 <div class="row text-center">
- 		<div class="col-12">
- 			<%= link_to 'Logout', admin_logout_path, :class => 'button' %>
- 		</div>
- 	</div>
- </div>
 	<div class="container-fluid title">
 		<div class="row">
 			<footer class="col">
@@ -139,6 +309,58 @@
 		</div>
   </div>
 </article>
+<script type="text/javascript">
+
+document.forms.new_event.event_title.onfocus = function() {
+	document.getElementById('title-required').innerHTML = '(Required!)'
+}
+
+document.forms.new_event.event_title.onblur = function() {
+	document.getElementById('title-required').innerHTML = ''
+}
+
+document.forms.new_event.event_date.onfocus = function() {
+	document.getElementById('date-required').innerHTML = '(Required!)'
+}
+
+document.forms.new_event.event_date.onblur = function() {
+	document.getElementById('date-required').innerHTML = ''
+}
+
+document.forms.new_event.event_description.onfocus = function() {
+	document.getElementById('description-required').innerHTML = '(Required!)'
+}
+
+document.forms.new_event.event_description.onblur = function() {
+	document.getElementById('description-required').innerHTML = ''
+}
+
+
+document.forms.new_future_event.future_event_title.onfocus = function() {
+	document.getElementById('title-required2').innerHTML = '(Required!)'
+}
+
+document.forms.new_future_event.future_event_title.onblur = function() {
+	document.getElementById('title-required2').innerHTML = ''
+}
+
+document.forms.new_future_event.future_event_date.onfocus = function() {
+	document.getElementById('date-required2').innerHTML = '(Required!)'
+}
+
+document.forms.new_future_event.future_event_date.onblur = function() {
+	document.getElementById('date-required2').innerHTML = ''
+}
+
+document.forms.new_future_event.future_event_kind.onfocus = function() {
+	document.getElementById('type-required').innerHTML = '(Required!)'
+}
+
+document.forms.new_future_event.future_event_kind.onblur = function() {
+	document.getElementById('type-required').innerHTML = ''
+}
+
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
