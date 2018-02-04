@@ -12,6 +12,16 @@ Rails.application.routes.draw do
 
   get 'admin/logout'
 
+  resources :customers do
+    resources :events
+  end
+
+  resources :customer do
+    member do
+      get :delete
+    end
+  end
+
 
   resources :admin do
     member do
@@ -39,6 +49,8 @@ Rails.application.routes.draw do
   get 'main/evangelizacion'
 
   get 'main/rccho'
+
+  get 'main/checkout'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
