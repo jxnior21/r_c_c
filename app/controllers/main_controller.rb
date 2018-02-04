@@ -2,6 +2,7 @@ class MainController < ApplicationController
   def index
     @events = Event.all
     @future_events = FutureEvent.all
+    @customer = Customer.all
   end
 
   def formacion
@@ -13,5 +14,7 @@ class MainController < ApplicationController
   def rccho
   end
 
+  def checkout
+  end
 
 end

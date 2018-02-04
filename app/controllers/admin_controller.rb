@@ -11,6 +11,7 @@ class AdminController < ApplicationController
     @counter = Event.last
     @events = Event.all
     @future_events = FutureEvent.all
+    @customers = Customer.all
   end
 
   def update
