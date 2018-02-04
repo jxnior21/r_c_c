@@ -32,15 +32,16 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
+    @event.customers.destroy
     @event.destroy
-    flash[:notice] = "Successfully deleted future event"
+    flash[:notice] = "Successfully deleted event"
     redirect_to(admin_path)
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:title, :date, :description)
+    params.require(:event).permit(:title, :date, :description, :price)
   end
 
 end
