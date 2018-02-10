@@ -2,25 +2,13 @@ class AdminController < ApplicationController
 
   layout 'application'
 
-  before_action :confirm_logged_in, :except => [:login, :attempt_login, :logout]
-
-  def login
-  end
+  before_action :confirm_logged_in, :except => [:attempt_login, :logout]
 
   def menu
     @counter = Event.last
     @events = Event.all
     @future_events = FutureEvent.all
     @customers = Customer.all
-  end
-
-  def update
-    @event = Event.find(params[:id])
-    if @event.update_attributes(event_params)
-      redirect_to(admin_path)
-    else
-      render('edit')
-    end
   end
 
   def attempt_login
