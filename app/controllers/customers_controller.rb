@@ -1,9 +1,5 @@
 class CustomersController < ApplicationController
 
-  def new
-    @customer = Customer.new
-  end
-
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
@@ -12,7 +8,7 @@ class CustomersController < ApplicationController
       price = event.price
       price.gsub!(/[.]/, '')
       price = price.to_i
-      Stripe.api_key = "sk_test_TrpgQwklpivgZpc4q7QPCtbj"
+      Stripe.api_key = "sk_test_Uqgr2je9Z41t0un6gLuCB7bQ"
       token = params[:stripeToken]
       charge = Stripe::Charge.create(
         :amount => price,
@@ -21,19 +17,8 @@ class CustomersController < ApplicationController
         :statement_descriptor => event.title,
         :source => token,
       )
-      redirect_to(main_checkout_path)
+      redirect_to(root_path)
     end
-  end
-
-  def delete
-    @customer = Customer.find(params[:id])
-  end
-
-  def destroy
-    @customer = Customer.find(params[:id])
-    @customer.destroy
-    flash[:notice] = "Successfully deleted future event"
-    redirect_to(admin_path)
   end
 
   private

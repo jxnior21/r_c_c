@@ -7,6 +7,10 @@ end
 
 gem 'stripe'
 
+gem 'prawn-table', '~> 0.2.2'
+
+gem 'prawn', '~> 2.2', '>= 2.2.2'
+
 gem 'coffee-script-source', '~> 1.8'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
