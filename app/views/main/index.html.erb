@@ -124,6 +124,16 @@
 				<br />
 				<em>Descripción</em>: <%= event.description %><br /><br />
 				<em>Precio</em>: $<%= event.price %></p>
+				<% sl = event.capacity - event.customers.size %>
+				<% if sl > 0 %>
+				<button class="badge-btn">
+					<em>Espacio disponibles</em> <span class="badge badge-light"><%= sl %></span>
+				</button><br /><br />
+				<% else %>
+				<button class="badge-btn">
+					<em>Espacio disponibles</em> <span class="badge badge-light">0</span>
+				</button><br /><br />
+				<% end %>
 				<!-- Show event Modal button -->
 				<div class="row">
 					<div class="col-12">
@@ -157,14 +167,14 @@
 			<div class=" container">
 				<div class="row text-center">
 					<div class="col-12">
-						<button type="button" title="Register" class="button submit" data-toggle="modal" data-target="#RegisterModal">
+						<button type="button" title="Register" data-backdrop="static" class="button submit" data-toggle="modal" data-target="#RegisterModal">
 							Registrarse para un evento
 						</button>
 					</div>
 				</div>
 			</div>
 			<div class="container text-center">
-				<span class="hint">&#42;Todos los eventos son no reembolsable</span><br />
+				<span class="hint">&#42;Todos los eventos no son reembolsable</span><br />
 			</div>
 			<!-- Register Modal -->
 			<div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -188,18 +198,21 @@
 						    <div class="row form-group">
 						      <div class="col"></div>
 						      <div class="col-8">
-										<%= form_for @customer.new, :remote => true, :html => {:id => 'register'}, :method => 'post' do |f| %>
+										<%= form_for @customer.new, :html => {:id => 'register'}, :method => 'post' do |f| %>
 									  <strong>Event</strong><br />
-									  <%= f.collection_select(:event_id, @events, :id, :title,) %><br /><br />
+									  <%= f.collection_select(:event_id, @events.where('visible = true'), :id, :title, prompt: true) %><br />
+										<span class="hint" id="eventerror"></span><br />
                     <div class="row">
 											<div class="col-sm-1 col-md-1"></div>
 											<div class="col-12 col-sm-5 col-md-5">
 												<strong>First name</strong><br />
-												<%= f.text_field(:first_name, :class => 'form-control', :placeholder => 'First name') %><br />
+												<%= f.text_field(:first_name, :class => 'form-control', :placeholder => 'First name') %>
+												<span class="hint" id="firstnameerror"></span><br />
 											</div>
 											<div class="col-12 col-sm-5 col-md-5">
 												<strong>Last name</strong><br />
-												<%= f.text_field(:last_name, :class => 'form-control', :placeholder => 'Last name') %><br />
+												<%= f.text_field(:last_name, :class => 'form-control', :placeholder => 'Last name') %>
+												<span class="hint" id="lastnameerror"></span><br />
 											</div>
 											<div class="col-sm-1 col-md-1"></div>
                     </div>
@@ -207,31 +220,26 @@
 											<div class="col-sm-2 col-md-2"></div>
 											<div class="col-12 col-sm-8 col-md-8">
 												<strong>Telephone #</strong><br />
-												<%= f.text_field(:telephone, :class => 'form-control', :placeholder => 'xxx-xxx-xxxx') %><br />
+												<%= f.telephone_field(:telephone, :class => 'form-control', :placeholder => 'xxx-xxx-xxxx') %>
+												<span class="hint" id="telephonerror"></span><br />
 											</div>
 											<div class="col-sm-2 col-md-2"></div>
 										</div>
 										<div class="row">
 											<div class="col-sm-1 col-md-1"></div>
 											<div class="col-12 col-sm-10 col-md-10">
-												<strong>Address 1</strong><br />
-							          <%= f.text_field(:address1, :class => 'form-control') %><br />
+												<strong>Address</strong><br />
+							          <%= f.text_field(:address1, :class => 'form-control') %>
+												<span class="hint" id="addresserror"></span><br />
 												<div class="col-sm-1 col-md-1"></div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-sm-1 col-md-1"></div>
-											<div class="col-12 col-sm-10 col-md-10">
-												<strong>Address 2</strong><br />
-							          <%= f.text_field(:address2, :class => 'form-control') %><br />
-											<div class="col-sm-1 col-md-1"></div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-sm-2 col-md-2"></div>
 											<div class="col-12 col-sm-8 col-md-8">
 												<strong>City</strong><br />
-							          <%= f.text_field(:city, :class => 'form-control') %><br />
+							          <%= f.text_field(:city, :class => 'form-control') %>
+												<span class="hint" id="cityerror"></span><br />
 											</div>
 											<div class="col-sm-2 col-md-2"></div>
 										</div>
@@ -290,7 +298,8 @@
 													['WV', 'WV'],
 													['WI', 'WI'],
 													['WY', 'WY'],
-													], 'state')) %><br /><br />
+													], 'state')) %><br />
+													<span class="hint" id="stateerror"></span><br />
 											</div>
 											<div class="col-sm-2 col-md-2"></div>
 										</div>
@@ -298,7 +307,8 @@
 											<div class="col-sm-4 col-md-4"></div>
 											<div class="col-12 col-sm-4 col-md-4">
 												<strong>Zip</strong><br />
-							          <%= f.text_field(:zip, :class => 'form-control') %><br />
+							          <%= f.text_field(:zip, :class => 'form-control') %>
+												<span class="hint" id="ziperror"></span><br />
 											</div>
 											<div class="col-sm-4 col-md-4"></div>
 										</div>
@@ -333,11 +343,13 @@
 											<div class="col-sm-1 col-md-1"></div>
 											<div class="col-12 col-sm-5 col-md-5">
 												<strong>First name</strong><br />
-												<%= f.text_field(:first_name2, :class => 'form-control') %><br />
+												<%= f.text_field(:first_name2, :class => 'form-control') %>
+												<span class="hint" id="firstnameerror2"></span><br />
 											</div>
 		                  <div class="col-12 col-sm-5 col-md-5">
 												<strong>Last name</strong><br />
-												<%= f.text_field(:last_name2, :class => 'form-control') %><br />
+												<%= f.text_field(:last_name2, :class => 'form-control') %>
+												<span class="hint" id="lastnameerror2"></span><br />
 												<div class="col-sm-1"></div>
 		                  </div>
 											<div class="col-sm-1 col-md-1"></div>
@@ -346,11 +358,13 @@
 											<div class="col-sm-1 col-md-1"></div>
 											<div class="col-12 col-sm-5 col-md-5">
 												<strong>Relationship</strong><br />
-												<%= f.text_field(:relationship, :class => 'form-control') %><br />
+												<%= f.text_field(:relationship, :class => 'form-control') %>
+												<span class="hint" id="relationshiperror"></span><br />
 											</div>
 											<div class="col-12 col-sm-5 col-md-5">
 												<strong>Telephone #</strong><br />
-												<%= f.text_field(:telephone2, :class => 'form-control', :placeholder => 'xxx-xxx-xxxx') %><br />
+												<%= f.text_field(:telephone2, :class => 'form-control', :placeholder => 'xxx-xxx-xxxx') %>
+												<span class="hint" id="telephoneerror2"></span><br />
 												<div class="col-sm-1 col-md-1"></div>
 											</div>
 											<div class="col-sm-1 col-md-1"></div>
@@ -430,12 +444,14 @@
 	</div>
 	<div class="container text-center">
 		<div class="row">
-			<div class="col chip">
-				<a href="#exampleModal" data-toggle="modal"><p>St.Isaac's</p></a>
+			<div class="col-sm col-6">
+				<button type="button" class="chip submit" data-toggle="modal" data-target="#SIModal">
+					St.Isaac's
+				</button>
 			</div>
 			<div>
 				<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal fade" id="SIModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="pcard">
 						  <h1>St.Isaac's</h1>
@@ -447,60 +463,94 @@
 					</div>
 				</div>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Good Shepherd</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#St.Isaac'sModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
-			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
-			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
-			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
-			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
-			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
 			</div>
-			<div class="col chip">
-				<a href="#" data-toggle="modal"><p>Nombre de grupo</p></a>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
+			</div>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
+			</div>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
+			</div>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#GrupoModal">
+					Grupo
+				</button>
+			</div>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#St.Isaac'sModal">
+					St.Isaac's
+				</button>
+			</div>
+			<div class="col-sm col-6">
+				<button type="button" title="Register" class="chip submit" data-toggle="modal" data-target="#St.Isaac'sModal">
+					St.Isaac's
+				</button>
 			</div>
 		</div>
   </div>
