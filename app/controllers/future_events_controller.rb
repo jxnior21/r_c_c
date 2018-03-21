@@ -2,20 +2,12 @@ class FutureEventsController < ApplicationController
 
   layout 'application'
 
-  def new
-    @fevent = FutureEvent.new
-  end
-
   def create
     @fevent = FutureEvent.new(event_params)
     if @fevent.save
       flash[:notice] = "Successfully made new future event"
       redirect_to(admin_path)
     end
-  end
-
-  def edit
-    @fevent = FutureEvent.find(params[:id])
   end
 
   def update
@@ -25,8 +17,6 @@ class FutureEventsController < ApplicationController
       redirect_to(admin_path)
     end
   end
-
-
 
   def destroy
     @fevent = FutureEvent.find(params[:id])
