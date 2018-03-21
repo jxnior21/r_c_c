@@ -13,7 +13,7 @@ class CustomersController < ApplicationController
       charge = Stripe::Charge.create(
         :amount => price,
         :currency => "usd",
-        :description => "Renovacion Carismatica: " + @customer.first_name + " " + @customer.last_name,
+        :description => event.title + ": " + @customer.first_name + " " + @customer.last_name,
         :statement_descriptor => event.title,
         :source => token,
       )
