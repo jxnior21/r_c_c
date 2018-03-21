@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20180121165427) do
     t.string "last_name", null: false
     t.string "telephone", null: false
     t.string "address1", null: false
-    t.string "address2"
     t.string "city", null: false
     t.string "state", null: false
     t.string "zip", null: false
@@ -43,8 +42,10 @@ ActiveRecord::Schema.define(version: 20180121165427) do
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title", default: "Evento", null: false
     t.string "date", limit: 8, default: "00/00/00"
-    t.string "description", null: false
+    t.text "description", null: false
     t.string "price", default: "00.00", null: false
+    t.integer "capacity", default: 0, null: false
+    t.boolean "visible", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
