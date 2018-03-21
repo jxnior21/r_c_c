@@ -1,5 +1,9 @@
 class Event < ApplicationRecord
 
+  def to_param
+   title
+  end
+
   has_many :customers
 
   validates_presence_of :title
