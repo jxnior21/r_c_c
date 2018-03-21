@@ -7,6 +7,11 @@ class AdminController < ApplicationController
   def menu
     @counter = Event.last
     @events = Event.all
+    @events.each do |event|
+      if event.customers.size == event.capacity
+        event.update_attributes(:visible => false)
+      end
+    end
     @future_events = FutureEvent.all
     @customers = Customer.all
   end
@@ -26,6 +31,7 @@ class AdminController < ApplicationController
       redirect_to(admin_path)
     else
       redirect_to(root_path)
+      flash[:notice] = "Invalid username or password"
     end
   end
 
