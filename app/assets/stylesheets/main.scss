@@ -96,7 +96,6 @@
   color: inherit;
 }
 
-
 .thover {
   transition: .5s;
   &:hover {
@@ -122,7 +121,7 @@
   font-size: 25px;
 }
 
-input[type=text], input[type=password], textarea#event_description, #card-element {
+input[type=text], input[type=tel], input[type=password], textarea#event_description, #card-element {
   padding: 10px;
   color: $darkred;
   border-radius: 10px;
@@ -131,11 +130,11 @@ input[type=text], input[type=password], textarea#event_description, #card-elemen
   transition: .5s;
 }
 
-input[type=text]::placeholder, input[type=password]::placeholder, textarea#event_description::placeholder {
+input[type=text]::placeholder, input[type=tel]::placeholder, input[type=password]::placeholder, textarea#event_description::placeholder {
   color: $darkred;
 }
 
-input[type=text]:focus, input[type=password]:focus, textarea#event_description:focus {
+input[type=text]:focus, input[type=tel]:focus, input[type=password]:focus, textarea#event_description:focus {
   background-color: $darkred;
   border: 1px $darkred solid;
   outline: none;
@@ -143,7 +142,7 @@ input[type=text]:focus, input[type=password]:focus, textarea#event_description:f
   color: $white;
 }
 
-input[type=text]:focus::placeholder, input[type=password]:focus::placeholder, textarea#event_description:focus::placeholder {
+input[type=text]:focus::placeholder, input[type=tel]:focus::placeholder, input[type=password]:focus::placeholder, textarea#event_description:focus::placeholder {
   color: $white;
 }
 
@@ -162,14 +161,6 @@ select {
 
 .submit {
   cursor: pointer;
-}
-
-.login {
-  margin: 23px auto;
-}
-
-.logout {
-  margin: 20px;
 }
 
 .modal-header{
@@ -194,16 +185,13 @@ select {
 }
 
 .chip {
-  display: inline-block;
-  margin: 5px;
-  padding: 0 10px;
-  height: 48px;
-  font-size: 16px;
-  line-height: 48px;
+  @extend .button;
+  width: 125px;
   border-radius: 25px;
-  background-color: $white;
   border: 2px $darkred solid;
-  transition: .5s;
+  &:hover {
+    border: 2px $darkred solid;
+  }
   a{
     text-decoration: none;
     &:visited {
@@ -238,11 +226,6 @@ select {
   }
 }
 
-.checkout {
-  font-size: 50px;
-  margin-top: 10%;
-}
-
 .registerhead {
   margin-bottom: 10px;
 }
@@ -260,6 +243,13 @@ select {
   margin-bottom: 10px;
 }
 
-.hidden {
-  display: none;
+.badge-light {
+  color: $darkred;
+}
+
+.badge-btn {
+  border-radius: 10px;
+  border: 1px $darkred solid;
+  color: $white;
+  background-color: $darkred;
 }
