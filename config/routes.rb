@@ -6,49 +6,26 @@ Rails.application.routes.draw do
 
   get 'admin/login'
 
-  get 'admin/menu'
-
   post 'admin/attempt_login'
 
-  get 'admin/logout'
+  get 'logout', :to => 'admin#logout'
 
-  resources :customers do
-    resources :events
+  resources :customers, only: [:create] do
   end
 
-  resources :customer do
-    member do
-      get :delete
-    end
+  resources :events, only: [:show, :create, :update, :destroy], :path => 'registered', param: :title  do
   end
 
-
-  resources :admin do
-    member do
-      get :delete
-    end
-  end
-
-
-  resources :events do
-    member do
-      get :delete
-    end
-  end
-
-  resources :future_events do
-    member do
-      get :delete
-    end
+  resources :future_events, only: [:create, :update, :destroy] do
   end
 
   get 'main/index'
 
-  get 'main/formacion'
+  get 'formacion', :to => 'main#formacion'
 
-  get 'main/evangelizacion'
+  get 'evangelizacion', :to => 'main#evangelizacion'
 
-  get 'main/rccho'
+  get 'rccho', :to => 'main#rccho'
 
   get 'main/checkout'
 
