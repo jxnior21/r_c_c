@@ -10,6 +10,16 @@ class MainController < ApplicationController
     @customer = Customer.all
   end
 
+  def find_event
+    found_event = Event.find(params[:format])
+    flash[:notice] = "selected event found"
+    flash[:ftitle] = found_event.title
+    flash[:id] = found_event.id
+    flash[:fprice] = found_event.price
+    p flash[:fprice]
+    render js: "window.location = '#{root_path}'"
+  end
+
   def formacion
   end
 
