@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   get 'rccho', :to => 'main#rccho'
 
-  get 'main/checkout'
+  get 'selected_event', :to => 'main#find_event'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
