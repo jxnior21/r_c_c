@@ -27,16 +27,17 @@ class AdminController < ApplicationController
 
     if authorized_user
       session[:user_id] = authorized_user.id
-      flash[:notice] = "You are now logged in"
-      redirect_to(admin_path)
+      flash[:notice] = "Logged in"
+      render js: "window.location = '#{admin_path}'"
     else
-      redirect_to(root_path)
       flash[:notice] = "Invalid username or password"
+      render js: "window.location = '#{root_path}'"
     end
   end
 
   def logout
     session[:user_id] = nil
+    flash[:notice] = "Logged out"
     redirect_to(root_path)
   end
 
