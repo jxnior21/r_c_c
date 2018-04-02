@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      flash[:notice] = "Successfully made new event"
+      flash[:notice] = "Successfully made new event: #{@event.title}"
       redirect_to(admin_path)
     end
   end
@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find_by(title: params[:title])
     if @event.update_attributes(event_params)
-      flash[:notice] = "Successfully updated event"
+      flash[:notice] = "Successfully updated #{@event.title}"
       redirect_to(admin_path)
     end
   end
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
     @event = Event.find_by(title: params[:title])
     @event.customers.destroy
     @event.destroy
-    flash[:notice] = "Successfully deleted event"
+    flash[:notice] = "Successfully deleted #{@event.title}"
     redirect_to(admin_path)
   end
 

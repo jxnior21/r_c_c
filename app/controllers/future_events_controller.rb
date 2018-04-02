@@ -5,7 +5,7 @@ class FutureEventsController < ApplicationController
   def create
     @fevent = FutureEvent.new(event_params)
     if @fevent.save
-      flash[:notice] = "Successfully made new future event"
+      flash[:notice] = "Successfully made new future event: #{@fevent.title}"
       redirect_to(admin_path)
     end
   end
@@ -13,7 +13,7 @@ class FutureEventsController < ApplicationController
   def update
     @fevent = FutureEvent.find(params[:id])
     if @fevent.update_attributes(event_params)
-      flash[:notice] = "Successfully updated future event"
+      flash[:notice] = "Successfully updated #{@fevent.title}"
       redirect_to(admin_path)
     end
   end
@@ -21,7 +21,7 @@ class FutureEventsController < ApplicationController
   def destroy
     @fevent = FutureEvent.find(params[:id])
     @fevent.destroy
-    flash[:notice] = "Successfully deleted future event"
+    flash[:notice] = "Successfully deleted #{@fevent.title}"
     redirect_to(admin_path)
   end
 
