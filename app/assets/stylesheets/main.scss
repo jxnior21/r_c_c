@@ -67,6 +67,17 @@
   }
 }
 
+.closed-button {
+  color: $darkred;
+  text-decoration: none;
+  background: $white;
+  border-radius: 10px;
+  border: 1px $darkred solid;
+  font-size: 20px;
+  margin: 10px auto;
+  padding: 5px;
+}
+
 .button {
   @extend .btn;
   font-size: 20px;
@@ -121,7 +132,7 @@
   font-size: 25px;
 }
 
-input[type=text], input[type=tel], input[type=password], textarea#event_description, #card-element {
+input[type=text], input[type=tel], input[type=email], input[type=password], textarea#event_description, #card-element {
   padding: 10px;
   color: $darkred;
   border-radius: 10px;
@@ -134,7 +145,7 @@ input[type=text]::placeholder, input[type=tel]::placeholder, input[type=password
   color: $darkred;
 }
 
-input[type=text]:focus, input[type=tel]:focus, input[type=password]:focus, textarea#event_description:focus {
+input[type=text]:focus, input[type=tel]:focus, input[type=email]:focus, input[type=password]:focus, textarea#event_description:focus {
   background-color: $darkred;
   border: 1px $darkred solid;
   outline: none;
@@ -252,4 +263,15 @@ select {
   border: 1px $darkred solid;
   color: $white;
   background-color: $darkred;
+}
+
+.alert {
+  margin: 8px;
+  background-color: $white;
+  color: $darkred;
+  border: 1px $darkred solid;
+}
+
+hr {
+  background: $darkred;
 }
