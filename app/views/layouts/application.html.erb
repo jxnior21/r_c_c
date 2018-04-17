@@ -15,9 +15,16 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 		<script src="https://js.stripe.com/v3/"></script>
 	</head>
-
   <body>
     <%= yield %>
+		<div class="container-fluid title">
+			<div class="row">
+				<footer class="col">
+					<p class="text-center bye"><em>Que tengas un buen dia</em></p>
+					<p>©2017 my website</p>
+				</footer>
+			</div>
+		</div>
 		<%= javascript_include_tag 'application' %>
   </body>
 </html>
