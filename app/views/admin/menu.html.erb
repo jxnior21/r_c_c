@@ -57,9 +57,9 @@
 					</button><br /><br />
 				<% end %>
 				<% if event.visible %>
-				  <em>Status</em>: Open<br /><br /></p>
+				  <em>Status</em>: Open<br /></p>
 				<% else %>
-					<em>Status</em>: Closed<br /><br /></p>
+					<em>Status</em>: Closed<br /></p>
 				<% end %>
 				<div class="row">
 					<!-- Edit event Modal button <%= event.id %> -->
@@ -81,6 +81,7 @@
 						</button>
 					</div>
 				</div>
+				<br />
 				<!-- Edit event Modal <%= event.id %> -->
 				<div class="modal fade" id="EditModal-<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
