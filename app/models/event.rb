@@ -4,7 +4,7 @@ class Event < ApplicationRecord
    title
   end
 
-  has_many :customers
+  has_many :customers, lambda { reorder(first_name: :asc) }
 
   validates_presence_of :title
   validates_presence_of :description
