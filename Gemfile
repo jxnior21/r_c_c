@@ -7,6 +7,8 @@ end
 
 gem 'stripe'
 
+gem 'responders'
+
 gem 'prawn-table', '~> 0.2.2'
 
 gem 'prawn', '~> 2.2', '>= 2.2.2'
